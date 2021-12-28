@@ -26,6 +26,12 @@
   else {
     $loggedin = FALSE;
   }
+  
+  $result = queryMysql("SELECT * FROM user WHERE username='$user'");
+
+  $userData = $result->fetch_array(MYSQLI_ASSOC);
+  $user_ID = $userData['user_ID'];
+  $permission = $userData['default_permission'];
 
   if($loggedin)
   {
@@ -50,6 +56,24 @@
       </div>
         <script src="src/header.js"></script> 
     _MAIN;
+    if($permission > 0)
+    {
+      echo <<<_ADMIN
+              <div class="navleft">
+                <a href="./post.php">Create Post</a>
+                <a href="./rule.php">Change Permission</a>
+                <a href="./member.php">Show Teammate</a>
+              </div>
+      _ADMIN;
+    }
+    else
+    {
+      echo <<<_WORKER
+              <div class="navleft">
+                <a href="./member.php">Show Teammate</a>
+              </div>
+      _WORKER;
+    }
   }
   else
   {
@@ -59,4 +83,9 @@
       window.location.href="./index.php";
     </script>';
   }
+
+  $result_2 = queryMysql("SELECT * FROM profiles WHERE user_ID='$user_ID'");
+  
+  $userProfile = $result_2->fetch_array(MYSQLI_ASSOC);
+  $department = $userProfile['department'];
 ?>

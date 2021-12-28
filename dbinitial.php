@@ -51,13 +51,15 @@
                   'post_ID INT NOT NULL AUTO_INCREMENT, 
                   user_ID INT NOT NULL, 
                   board_ID TINYINT NOT NULL, 
+                  department VARCHAR(16) NOT NULL, 
                   post_name VARCHAR(50), 
                   create_time DATETIME NOT NULL, 
                   last_update DATETIME NOT NULL, 
                   content TEXT NOT NULL, 
                   
                   PRIMARY KEY (post_ID), 
-                  FOREIGN KEY (user_ID) REFERENCES user(user_ID),
+                  FOREIGN KEY (user_ID) REFERENCES user(user_ID), 
+                  FOREIGN KEY (department) REFERENCES profiles(department), 
                   FOREIGN KEY (board_ID) REFERENCES board(board_ID)');
                   /*
                   * +-------------+-------------+------+-----+---------+----------------+
