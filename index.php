@@ -27,7 +27,7 @@
             {
                 $_SESSION['user'] = $user;
                 $_SESSION['pass'] = $pass;
-                header("Location: ./header.php");
+                header("Location: ./board.php");
             }
         }
     }
@@ -59,7 +59,7 @@ echo <<<_END
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=1">
         <meta charset="utf-8">
         <title>Login / Sign Up</title>
-        <link rel="stylesheet" type="text/css" href="src/main.css">
+        <link rel="stylesheet" type="text/css" href="src/index.css">
         <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     </head>
 
@@ -126,7 +126,7 @@ echo <<<_END
                 </p>
             </form>
         </div>
-        <script src="src/main.js"></script>
+        <script src="src/index.js"></script>
     </body>
 </html>
 _END;
