@@ -35,8 +35,8 @@
   }
 
   echo <<<_TABLEEND
-    </table>
       </tbody>
+    </table>
   _TABLEEND;
 
   // simple post pagination

@@ -50,7 +50,6 @@
       createTable('post', 
                   'post_ID INT NOT NULL AUTO_INCREMENT, 
                   user_ID INT NOT NULL, 
-                  board_ID TINYINT NOT NULL, 
                   department VARCHAR(16) NOT NULL, 
                   post_name VARCHAR(50), 
                   create_time DATETIME NOT NULL, 
@@ -59,15 +58,14 @@
                   
                   PRIMARY KEY (post_ID), 
                   FOREIGN KEY (user_ID) REFERENCES user(user_ID), 
-                  FOREIGN KEY (department) REFERENCES profiles(department), 
-                  FOREIGN KEY (board_ID) REFERENCES board(board_ID)');
+                  FOREIGN KEY (department) REFERENCES profiles(department)');
                   /*
                   * +-------------+-------------+------+-----+---------+----------------+
                   * | Field       | Type        | Null | Key | Default | Extra          |
                   * +-------------+-------------+------+-----+---------+----------------+
                   * | post_ID     | int         | NO   | PRI | NULL    | auto_increment |
                   * | user_ID     | int         | NO   | MUL | NULL    |                |
-                  * | board_ID    | tinyint     | NO   | MUL | NULL    |                |
+                  * | department  | varchar(16) | NO   | MUL | NULL    |                |
                   * | post_name   | varchar(50) | YES  |     | NULL    |                |
                   * | create_time | datetime    | NO   |     | NULL    |                |
                   * | last_update | datetime    | NO   |     | NULL    |                |
