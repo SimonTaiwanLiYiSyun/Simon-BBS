@@ -59,4 +59,21 @@
     return $connection->real_escape_string($var);
   }
 
+  function showProfile($user)
+  {
+    global $pdo;
+
+    if (file_exists("$user.jpg"))
+      echo "<img src='$user.jpg' style='float:left;'>";
+
+    $result = $pdo->query("SELECT * FROM profiles WHERE user='$user'");
+
+    while ($row = $result->fetch())
+    {
+      die(stripslashes($row['text']) . "<br style='clear:left;'><br>");
+    }
+    
+    echo "<p>Nothing to see here, yet</p><br>";
+  }
+
 ?>
