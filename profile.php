@@ -29,6 +29,23 @@
     else $mail = "";
   }
 
+  if (isset($_POST['changepwd']))
+  {
+    
+    $new_password = santizeString($_POST['new_password']);
+    $query = "UPDATE user SET password = '$new_password' WHERE username = '$user'";
+    mysql_query($query);
+
+    $_SESSION['pass'] = $new_password;
+    
+    echo <<< EOT
+      <script>
+        alert("Done.");
+        window.history.go(-1);
+      </script>		
+    EOT;
+  }
+
   // $mail = stripslashes(preg_replace('/\s\s+/', ' ', $mail));
 
   if (isset($_FILES['image']['name']))
