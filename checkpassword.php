@@ -10,4 +10,6 @@
       echo  "<span class='taken'>&nbsp;&#x2718; " .
             "The password is incorrect.</span>";
   }
+
+  unset($result);
 ?>

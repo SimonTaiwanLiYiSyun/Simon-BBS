@@ -13,4 +13,6 @@
       echo "<span class='available'>&nbsp;&#x2714; " .
            "The username '$r_user' is available</span>";
   }
+
+  unset($result);
 ?>

@@ -17,7 +17,8 @@
   $result_3 = queryMysql("SELECT * FROM post WHERE department='$department' ORDER BY post_ID LIMIT $start_from, $limit");
   
   echo <<<_TABLESTART
-        <table>
+        <h2>Post</h2>
+        <table class="main">
           <tbody>
   _TABLESTART;
 
@@ -25,7 +26,7 @@
   {
     $post_name = $postData['post_name'];
 	  $post_ID = $postData['post_ID'];
-	  $post_link = "<a href='post.php?post_ID=$post_ID'>$post_name</a>";
+	  $post_link = "<a href='show_post.php?post_ID=$post_ID'>$post_name</a>";
     
     echo <<<_POST
           <tr>
@@ -44,11 +45,11 @@
   // advance post pagination https://www.geeksforgeeks.org/php-pagination-set-3/?ref=lbp
 
   $result_4 = queryMysql("SELECT * FROM post WHERE department='$department' ORDER BY post_ID");
-  $rows = $result->num_rows; 
+  $rows = $result_4->num_rows; 
   $total_pages = ceil($rows / $limit);   // 無條件進位
 
   echo <<<_PAGINATIONSTART
-        <ul class="pagination">
+        <div class="pagination">
   _PAGINATIONSTART;
 
   $pageLink = "";
@@ -57,22 +58,24 @@
   {
     if($i == $pn)   // current page
     {
-      $pageLink .= "<li class='active'><a href='board.php?page=" . $i ."'>".$i."</a></li>";
+      $pageLink .= "<a class='active' href='board.php?page=" . $i ."'>".$i."</a>";
     }
     else
     {
-      $pageLink .= "<li><a href='board.php?page=" . $i ."'>".$i."</a></li>";
+      $pageLink .= "<a href='board.php?page=" . $i ."'>".$i."</a>";
     }
   }
 
   echo $pageLink;
 
   echo <<<_PAGINATIONEND
-        </ul>
+        </div>
   _PAGINATIONEND;
 
   echo <<<_END
           </body>
         </html>
   _END;
+
+  unset($result_6, $result_4);
 ?>

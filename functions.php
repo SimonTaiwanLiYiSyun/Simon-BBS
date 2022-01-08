@@ -59,21 +59,29 @@
     return $connection->real_escape_string($var);
   }
 
-  function showProfile($user)
+  function showProfile($user_ID, $user)
   {
-    global $pdo;
+    global $connection;
 
     if (file_exists("$user.jpg"))
-      echo "<img src='$user.jpg' style='float:left;'>";
+      echo "<img src='$user.jpg' style='float:left; margin-left: 196px;'>";
 
-    $result = $pdo->query("SELECT * FROM profiles WHERE user='$user'");
+    $result = $connection->query("SELECT * FROM profiles WHERE user_ID='$user_ID'");
+    $userData = $result->fetch_array(MYSQLI_ASSOC);
 
-    while ($row = $result->fetch())
+    if($userData['text'] == NULL || $userData['text'] == '')
     {
-      die(stripslashes($row['text']) . "<br style='clear:left;'><br>");
+      echo "<p style='margin-left: 196px; display: block;'>Nothing to see here, yet</p>";
     }
-    
-    echo "<p>Nothing to see here, yet</p><br>";
+    else
+    {
+      while ($row = $result->num_rows)
+      {
+        // die(stripslashes($userData['text']) . "<br style='clear:left;'><br>");
+        echo stripslashes($userData['text']) . "<br style='clear:left;'><br>";
+        break;
+      }
+    }
   }
 
   function valid_email($str) {

@@ -13,6 +13,27 @@
   text-decoration: none;
 }
 
+.navleft {
+  height: 100%;
+  width: 160px;
+  position: fixed;
+  z-index: 1;
+  padding-left: 16px;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.navleft a {
+  float: left;
+  font-size: 16px;
+  color: #818181;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
 .dropdown {
   float: right;
   overflow: hidden;
@@ -32,6 +53,10 @@
 
 .navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus {
   background-color: #24bbf7;
+}
+
+.navleft a:hover {
+  color: #f1f1f1;
 }
 
 .dropdown-content {
@@ -58,4 +83,47 @@
 
 .show {
   display: block;
+}
+
+.main {
+  margin-left: 176px; 
+  font-size: 18px; 
+  background-color: #eeeeee; 
+  display: block; 
+  padding: 20px;
+}
+
+.main article {
+  border-style: double;
+}
+
+.main h3 {
+  border-bottom: solid;
+  border-bottom-color: tan;
+  border-bottom-width: 5px;
+}
+
+.pagination {
+  margin-left: 196px; 
+  display:inline-block; 
+  font-size: 16px; 
+}
+
+.pagination a {
+  color: black;
+  background-color: #f8f8f8;
+  float: left; 
+  margin-top: 90px;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+h2 {
+  margin-left: 176px; 
+  padding: 10px 10px;
 }

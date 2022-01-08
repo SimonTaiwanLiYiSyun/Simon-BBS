@@ -3,9 +3,9 @@
 
   if (!$loggedin) die("</body></html>");
 
-  echo "<h3>Your Profile</h3>";
+  echo "<h2>Your Profile</h2>";
 
-  $query = "SELECT * FROM profiles WHERE user='$user'";
+  $query = "SELECT * FROM profiles WHERE user_ID='$user_ID'";
   $result_5 = queryMysql($query);
   if (isset($_POST['mail']))
   {
@@ -16,37 +16,66 @@
 
     if ($result_5->num_rows)
          queryMysql("UPDATE profiles SET mail='$mail' where user_ID='$user_ID'");
-    else queryMysql("INSERT INTO profiles VALUES('$user', '$mail')");
+    else queryMysql("INSERT INTO profiles VALUES('$user_ID', '$mail')");
   }
   else
   {
     if ($result_5->num_rows)
     {
-      $row  = $result->fetch_array(MYSQLI_ASSOC);
+      $row  = $result_5->fetch_array(MYSQLI_ASSOC);
       // $mail = stripslashes($row['mail']);
       $mail = $row['mail'];
     }
     else $mail = "";
   }
 
-  if (isset($_POST['changepwd']))
+  if (isset($_POST['text']))
+  {
+    $text = santizeString($_POST['text']);
+    $text = preg_replace('/\s\s+/', ' ', $text);
+
+    if ($result_5->num_rows)
+         queryMysql("UPDATE profiles SET text='$text' where user_ID='$user_ID'");
+    else queryMysql("INSERT INTO profiles VALUES('$user_ID', '$text')");
+  }
+  else
+  {
+    if ($row['text'] == null)
+    {
+      $text = "";
+    }
+    else $text = stripslashes($row['text']);
+  }
+
+  $text = stripslashes(preg_replace('/\s\s+/', ' ', $text));
+
+  if (isset($_POST['new_password']))
   {
     
     $new_password = santizeString($_POST['new_password']);
-    $query = "UPDATE user SET password = '$new_password' WHERE username = '$user'";
-    mysql_query($query);
+    if($new_password != '')
+    {
+      $query = "UPDATE user SET password = '$new_password' WHERE user_ID = '$user_ID'";
+      queryMysql($query);
 
-    $_SESSION['pass'] = $new_password;
-    
-    echo <<< EOT
-      <script>
-        alert("Done.");
-        window.history.go(-1);
-      </script>		
-    EOT;
+      $_SESSION['pass'] = $new_password;
+
+      echo <<<_EOT
+        <script>
+          alert("Done.");
+          window.history.go(-1);
+        </script>		
+      _EOT;
+    }
+    else
+    {
+      echo <<<_EOT
+        <script>
+          window.history.go(-1);
+        </script>		
+      _EOT;
+    }
   }
-
-  // $mail = stripslashes(preg_replace('/\s\s+/', ' ', $mail));
 
   if (isset($_FILES['image']['name']))
   {
@@ -96,46 +125,51 @@
     }
   }
 
-  showProfile($user);
+  showProfile($user_ID, $user);
 
-echo <<<_END
-      <script>
-        function checkPassword(password)
-        {
-          $.post
-          (
-            'checkpassword.php',
-            { password : password.value },
-            function(data)
-            {
-              $('#used').html(data)
-            }
-          )
-        }
-      </script> 
+  echo <<<_END
+        <script>
+          function checkPassword(password)
+          {
+            $.post
+            (
+              'checkpassword.php',
+              { password : password.value },
+              function(data)
+              {
+                $('#used').html(data)
+              }
+            )
+          }
+        </script> 
+        
 
-      <form data-ajax='false' method='post'
-        action='profile.php?r=$randstr' enctype='multipart/form-data'>
-        <h3>Enter or edit your details and/or upload an image</h3>
-        <textarea name='mail'>$mail</textarea><br>
-        Image: <input type='file' name='image' size='14'>
-        <div>
-          <input type="password" class="form__input" placeholder="Old Password" name="old_password" onBlur="checkPassword(this)">
-          <div class="form__input-error-message" id="used"></div>
-        </div>
-        <div class="form__input-group">
-          <input type="password" class="form__input" placeholder="Password" name="new_password">
-          <!--<div class="form__input-error-message"></div>-->
-        </div>
-        <div class="form__input-group">
-          <input type="password" id="confirmPassword" class="form__input" placeholder="Confirm Password">
-          <div class="form__input-error-message"></div>
-        </div>
-      <input type='submit' value='Save Profile'><br>
-      </form>
-    </div><br>
-    <script src="src/profile.js"></script>
-  </body>
-</html>
-_END;
+        <form data-ajax='false' method='post'
+          action='profile.php?r=$randstr' enctype='multipart/form-data' class="main">
+          <h3>Enter or edit your email, details and/or upload an image</h3>
+          Email: <br><textarea name='mail'>$mail</textarea><br>
+          Image: <br><input type='file' name='image' size='14'><br>
+          Details: <br><textarea name='text'>$text</textarea><br>
+          Change Password: <br>
+          <div>
+            <input type="password" class="form__input" placeholder="Old Password" name="old_password" onBlur="checkPassword(this)">
+            <div class="form__input-error-message" id="used"></div>
+          </div>
+          <div class="form__input-group">
+            <input type="password" id="newPassword" class="form__input" placeholder="Password" name="new_password">
+            <!--<div class="form__input-error-message"></div>-->
+          </div>
+          <div class="form__input-group">
+            <input type="password" id="confirmPassword" class="form__input" placeholder="Confirm Password">
+            <div class="form__input-error-message"></div>
+          </div>
+        <input type='submit' value='Save Profile'><br>
+        </form>
+      </div><br>
+      <script src="src/profile.js"></script>
+    </body>
+  </html>
+  _END;
+
+  unset($result_5);
 ?>

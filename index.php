@@ -48,8 +48,11 @@
             $query = "INSERT INTO user(username, password, default_permission, registeration_time)
                         VALUES ('$r_user', '$r_pass', '0', '$now')";
             queryMysql($query);
-            alert("Account create success!");
-            header("Location: ./index.php");
+            echo '<script>
+                alert("Signup success."); 
+                setTimeout(() => {}, 5000); 
+                window.location.href="./index.php";
+            </script>';
         }
     }
 
@@ -130,4 +133,6 @@ echo <<<_END
     </body>
 </html>
 _END;
+
+unset($result);
 ?>

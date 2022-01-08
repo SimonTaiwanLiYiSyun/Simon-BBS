@@ -25,16 +25,24 @@
       $query = "INSERT INTO post(user_ID, department, post_name, create_time, last_update, content) 
                 VALUES('$user_ID', '$department', '$post_name', '$now', '$now', '$content')";
       queryMysql($query);
+
+      echo '
+        </body></html>
+        <script>
+          alert("Post Success."); 
+          window.location.href="./board.php";
+        </script>';
     }
   }
 
   echo <<<_END
-      <form method='post' action='post.php'>
+      <h2>Create Post</h2>
+      <form method='post' action='post.php' class="main">
         <fieldset data-role="controlgroup" data-type="horizontal">
-          <legend>Create Post</legend>
           <label>Post title:</label> <input type="text" name="title"><br>
-          <label>Your Content:</label> <input type="text" name="content"><br>
+          <label>Post Content:</label> <textarea name="content" cols="40" rows="5"></textarea><br>
         </fieldset>
+        <input type="submit" value="submit">
       </form><br>
     </body>
   </html>

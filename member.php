@@ -8,7 +8,8 @@
   $result_5 = queryMysql($query);
 
   echo <<<_MEMBERSTART
-    <table class='member'>
+    <h2>User List</h2>
+    <table class="main">
       <tbody>
   _MEMBERSTART;
 
@@ -34,4 +35,6 @@
     </table>
   </body></html>
   _MEMBEREND;
+
+  unset($result_5, $result_6);
 ?>

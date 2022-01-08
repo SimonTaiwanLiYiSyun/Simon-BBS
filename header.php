@@ -13,6 +13,7 @@
       <script src='javascript.js'></script>
       <script src='jquery-2.2.4.min.js'></script>
       <script src='jquery.mobile-1.4.5.min.js'></script>
+      <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 
   _INIT;
   
@@ -43,7 +44,7 @@
 
       <body>
       <div class="navbar">
-        <a href="home.php">Simon-BBS</a>
+        <a href="board.php">Simon-BBS</a>
         <div class="dropdown">
           <button class="dropbtn" onclick="myFunction()">Menu
             <i class="fa fa-caret-down"></i>
@@ -59,9 +60,10 @@
     if($permission > 0)
     {
       echo <<<_ADMIN
+            </head>
               <div class="navleft">
                 <a href="./post.php">Create Post</a>
-                <a href="./rule.php">Change Permission</a>
+                <a href="./rule.php">Show Permission</a>
                 <a href="./member.php">Show Teammate</a>
               </div>
       _ADMIN;
@@ -69,6 +71,7 @@
     else
     {
       echo <<<_WORKER
+            </head>
               <div class="navleft">
                 <a href="./member.php">Show Teammate</a>
               </div>
@@ -88,4 +91,5 @@
   
   $userProfile = $result_2->fetch_array(MYSQLI_ASSOC);
   $department = $userProfile['department'];
+  unset($result, $result_2);
 ?>

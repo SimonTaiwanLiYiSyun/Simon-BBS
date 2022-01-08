@@ -16,7 +16,8 @@
   $result_5 = queryMysql($query);
 
   echo <<<_MEMBERSTART
-    <table class='member'>
+    <h2>User Permission</h2>
+    <table class="main">
       <thead>
         <tr>
           <td>Username</td>
@@ -51,4 +52,6 @@
     </table>
   </body></html>
   _MEMBEREND;
+  
+  unset($result_5, $result_6);
 ?>
