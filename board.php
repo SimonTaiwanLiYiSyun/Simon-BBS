@@ -14,7 +14,7 @@
 
   $start_from = ($pn-1) * $limit;  
 
-  $result_3 = queryMysql("SELECT * FROM post WHERE department='$department' ORDER BY post_ID LIMIT $start_from, $limit");
+  $result_3 = queryMysql("SELECT * FROM post WHERE department='$department' ORDER BY post_ID DESC LIMIT $start_from, $limit");
   
   echo <<<_TABLESTART
         <h2>Post</h2>
