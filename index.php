@@ -95,7 +95,7 @@ echo <<<_END
                     <input type="password" autofocus class="form__input" placeholder="Password" name="pass">
                     <div class="form__input-error-message"></div>
                 </div>
-                <button class="form__button" type="submit">Containue</button>
+                <button class="form__button" type="submit">Continue</button>
                 <p class="form__text">
                     <a href="#" class="form__link">Forgot your password?</a>
                 </p>
@@ -123,7 +123,7 @@ echo <<<_END
                     <input type="password" id="confirmPassword" autofocus class="form__input" placeholder="Confirm Password">
                     <div class="form__input-error-message"></div>
                 </div>
-                <button class="form__button" type="submit">Containue</button>
+                <button class="form__button" type="submit">Continue</button>
                 <p class="form__text">
                     <a id="linkLogin" href="./" class="form__link">Already have an account? Sign in.</a>
                 </p>
